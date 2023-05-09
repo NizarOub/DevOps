@@ -1,27 +1,18 @@
-# Use a PHP base image
-FROM php:7.4-cli
+FROM node:current-alpine3.17
 
+RUN apk add --no-cache git
 
 WORKDIR /app
 
-# Install Git and Composer
-RUN apt-get update && apt-get install -y git \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN   git clone https://github.com/NizarOub/DevOps.git --branch master  && cd /app/Mini-Projet-Devops  && npm install   
 
-# Set the working directory
+EXPOSE 80
 
-
-# Clone the Git repository
-RUN git clone https://github.com/NizarOub/DevOps.git .
-
-ENV COMPOSER_ALLOW_SUPERUSER 1
+ENTRYPOINT ["node", "Mini-Projet-Devops/script.js"]
+CMD ["node", "/Mini-Projet-Devops/index.js"]
 
 
-# Install any required PHP dependencies
-RUN composer install --no-dev
 
-# Expose port 8000 (if needed)
-EXPOSE 8000
 
-# Start the PHP server
-CMD [ "php", "-S", "0.0.0.0:8000" ]
+
+
