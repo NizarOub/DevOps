@@ -8,8 +8,8 @@ RUN   git clone https://github.com/NizarOub/DevOps.git --branch master  && cd /a
 
 EXPOSE 80
 
-
-CMD ["node", "/DevOps/index.js"]
+ENTRYPOINT ["node", "/app/DevOps/script.js"]
+CMD ["node", "/app/DevOps/index.js"]
 
 
 
